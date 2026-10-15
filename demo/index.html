@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f8f5"><title>차곡 — 나만의 암기 공간</title><style>:root{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:#243e33;background:#f7f8f5;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,a,select{-webkit-tap-highlight-color:transparent}button,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #728e60;outline-offset:5px}header{height:94px;max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 44px;border-bottom:1px solid #e4e8e1}.brand{color:#254737;text-decoration:none;display:flex;align-items:center;font-weight:800;font-size:25px;gap:10px}.brand-icon{font-size:33px}.brand-sub{font-size:12px;font-weight:400;color:#8a958d;margin-left:13px;letter-spacing:-.3px}.header-note{font-size:12px;color:#929a90}main{max-width:1112px;margin:0 auto;padding:0 24px;min-height:calc(100vh - 178px)}.hero{position:relative;padding:69px 0 64px;overflow:hidden}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2.2px;color:#8a9b7c}.hero h1{font-size:48px;line-height:1.45;letter-spacing:-2.5px;margin:18px 0}.hero h1 span{color:#72916a}.hero p,.intro p{font-size:14px;color:#849086;line-height:1.95;letter-spacing:-.3px}.hero-decoration{position:absolute;right:90px;top:68px;width:230px;height:250px}.paper{position:absolute;width:164px;height:202px;border-radius:12px}.paper-back{background:#e1e8d9;transform:rotate(-14deg);top:15px;left:5px}.paper-front{background:#fffef8;box-shadow:0 12px 30px #38552a0b;transform:rotate(10deg);left:40px;top:10px;padding:22px}.paper-front span{color:#8fa97a;font-size:45px;display:block;margin-bottom:14px}.paper-front i{display:block;height:5px;background:#e8ecdf;margin:10px 0;border-radius:9px}.paper-front i:nth-of-type(2){width:75%}.paper-front small{font-size:9px;color:#a4ae98}.hero-decoration b{position:absolute;right:-19px;top:0;font-size:40px;color:#a5b58a}.section-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:19px}.section-heading h2{font-size:16px;font-weight:600;margin:0}.section-heading h2 span{font-size:11px;color:#8e9b83;margin-left:8px}.section-heading>span{font-size:11px;color:#9aA296}.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.topic-card{text-align:left;border:1px solid #e5e9df;border-radius:17px;background:#fff;padding:27px 26px 19px;color:inherit;transition:transform .18s,box-shadow .18s}.topic-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px #273e3110}.card-top{display:flex;align-items:center;justify-content:space-between}.topic-icon{width:53px;height:53px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;background:#edf3e9;color:#698c5c;font-size:29px}.orange .topic-icon,.topic-icon.orange{background:#fbefe1;color:#b48958}.purple .topic-icon,.topic-icon.purple{background:#f0ecf8;color:#9583b0;font-family:Georgia,serif;font-size:27px}.tag{font-size:9px;letter-spacing:1.5px;color:#9ca496}.topic-card h3{font-size:20px;letter-spacing:-.8px;margin:25px 0 10px}.topic-card p{font-size:12px;color:#8a9388;line-height:1.8;min-height:42px;margin:0}.card-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf0e9;margin-top:24px;padding-top:17px;color:#8c9982;font-size:11px}.arrow{font-size:19px;color:#69825b}.tip{display:flex;gap:18px;align-items:center;padding:24px 28px;background:#eef2e9;border-radius:13px;margin:31px 0 38px}.tip>span{font-size:25px;color:#96a97f}.tip strong{font-size:12px;font-weight:500}.tip p{font-size:11px;color:#8b9683;line-height:1.7;margin:5px 0 0}footer{font-size:10px;color:#adb4a8;text-align:center;padding:24px}.back{border:0;background:none;padding:0;color:#8c9789;font-size:12px;margin:30px 0}.intro{text-align:center;padding:30px 0}.intro .topic-icon{display:flex;margin:0 auto 22px}.intro h1{font-size:35px;margin:12px}.modes{max-width:800px;display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:22px auto 70px}.modes button{background:white;border:1px solid #e1e7db;border-radius:16px;text-align:left;padding:32px;color:inherit}.modes button:hover{border-color:#8eaa79;background:#fcfdfb}.mode-symbol{font-size:30px;color:#789468}.modes h2{font-size:23px}.modes h2 span{float:right;color:#97ab8d}.modes p{font-size:13px;color:#85917f;line-height:1.8}.modes small{display:block;font-size:11px;color:#95a18e;margin-top:30px}.workspace-title{display:flex;align-items:center;justify-content:space-between}.workspace-title h1{font-size:32px;letter-spacing:-1px;margin:12px 0}.segmented{display:flex;background:#e9eee3;padding:4px;border-radius:10px}.segmented button{border:0;background:none;border-radius:7px;color:#8d9885;padding:9px 24px;font-size:13px}.segmented .active{background:white;color:#45623b;box-shadow:0 2px 6px #2940190b}.workspace-description{color:#8c9688;font-size:13px;line-height:1.7;margin-bottom:32px}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;gap:12px}.toolbar label{font-size:12px;color:#8d9786}.toolbar select{margin-left:12px;padding:10px 30px 10px 14px;border:1px solid #e0e5d9;border-radius:8px;background:white;color:#4b6042;font-size:12px}.toolbar-actions{display:flex;gap:8px}.toolbar button{background:#fff;border:1px solid #e1e6da;padding:10px 14px;border-radius:8px;color:#718267;font-size:12px}.list-header{display:grid;grid-template-columns:1fr 1fr;padding:15px 25px;font-size:11px;color:#8d9b82;background:#edf1e7;border-radius:10px 10px 0 0}.list-header span:nth-child(2){padding-left:24px}.learning-list{border:1px solid #e3e8dd;border-radius:0 0 10px 10px;overflow:hidden;background:#fff}.learning-row{display:grid;grid-template-columns:1fr 1fr;min-height:81px;border-bottom:1px solid #edf0e9}.learning-row:last-child{border-bottom:0}.question,.answer{display:flex;align-items:center;padding:21px 25px;gap:20px;font-size:16px;line-height:1.7}.row-number{font-size:10px;color:#b2bba9;min-width:19px}.answer{border-left:1px solid #edf0e9;justify-content:space-between;color:#607751}.answer small{font-size:10px;color:#a4b298;margin-left:8px}.reveal{display:flex;align-items:center;justify-content:space-between;width:100%;border:1px dashed #dde4d3;border-radius:7px;background:#f8faf5;padding:9px 15px;color:#9ba88e;font-size:12px}.reveal:hover{background:#edf3e6;color:#5e7c4b}.flag-only{font-size:35px}.progress-label{display:flex;justify-content:space-between;font-size:11px;color:#8e9c82;margin-bottom:10px}.progress-label strong{font-weight:500}.progress-track{height:4px;background:#e6ebdf;border-radius:4px;margin-bottom:24px;overflow:hidden}.progress-track div{height:100%;background:#8fa97a;transition:width .2s}.end-note{text-align:center;font-size:11px;color:#a0aa97;margin:26px 0}#completion{text-align:center;color:#60844b;font-size:14px;padding-bottom:20px}@media(min-width:1500px){main{padding-top:25px}}@media(max-width:700px){header{padding:0 22px;height:76px}.brand{font-size:22px}.brand-sub{font-size:10px;margin-left:3px}.header-note{display:none}main{padding:0 20px}.hero{padding:43px 0}.hero h1{font-size:37px}.hero p{font-size:12px}.hero-decoration{right:-55px;top:82px;transform:scale(.65);opacity:.65}.hero h1,.hero p{position:relative;z-index:1}.section-heading>span{display:none}.topics{grid-template-columns:1fr;gap:14px}.topic-card{padding:23px}.topic-card h3{margin-top:18px}.topic-card p{min-height:0}.card-bottom{margin-top:18px}.tip{padding:20px;align-items:flex-start}.modes{grid-template-columns:1fr}.intro{padding-top:10px}.workspace-title h1{font-size:25px}.segmented button{padding:8px 14px}.toolbar{align-items:flex-start;flex-direction:column}.toolbar select{margin-left:5px}.list-header{display:none}.learning-list{border-radius:10px}.learning-row{grid-template-columns:1fr;padding:8px 0}.question,.answer{padding:12px 20px}.answer{border-left:0;padding-left:59px;font-size:15px}.question{font-size:15px}.answer small{font-size:9px}.workspace-description{font-size:12px}.hero-decoration{pointer-events:none}}
+
+header{padding-top:env(safe-area-inset-top);height:calc(94px + env(safe-area-inset-top))}body{padding-bottom:env(safe-area-inset-bottom)}
+</style></head><body><header><a class="brand" href="#"><span class="brand-icon">▧</span> 차곡<span class="brand-sub">나만의 암기 공간</span></a><span class="header-note">조금씩, 오래 기억하기</span></header><main id="app"></main><footer>하나씩 쌓이는 오늘의 기억.</footer><script>(() => {
+  // data.js
+  var countries = [
+    ["\u{1F1F0}\u{1F1F7}", "\uB300\uD55C\uBBFC\uAD6D", "\uC11C\uC6B8"],
+    ["\u{1F1EF}\u{1F1F5}", "\uC77C\uBCF8", "\uB3C4\uCFC4"],
+    ["\u{1F1E8}\u{1F1F3}", "\uC911\uAD6D", "\uBCA0\uC774\uC9D5"],
+    ["\u{1F1F2}\u{1F1F3}", "\uBABD\uACE8", "\uC6B8\uB780\uBC14\uD1A0\uB974"],
+    ["\u{1F1FB}\u{1F1F3}", "\uBCA0\uD2B8\uB0A8", "\uD558\uB178\uC774"],
+    ["\u{1F1F9}\u{1F1ED}", "\uD0DC\uAD6D", "\uBC29\uCF55"],
+    ["\u{1F1EE}\u{1F1F3}", "\uC778\uB3C4", "\uB274\uB378\uB9AC"],
+    ["\u{1F1EB}\u{1F1F7}", "\uD504\uB791\uC2A4", "\uD30C\uB9AC"],
+    ["\u{1F1EC}\u{1F1E7}", "\uC601\uAD6D", "\uB7F0\uB358"],
+    ["\u{1F1E9}\u{1F1EA}", "\uB3C5\uC77C", "\uBCA0\uB97C\uB9B0"],
+    ["\u{1F1EE}\u{1F1F9}", "\uC774\uD0C8\uB9AC\uC544", "\uB85C\uB9C8"],
+    ["\u{1F1EA}\u{1F1F8}", "\uC2A4\uD398\uC778", "\uB9C8\uB4DC\uB9AC\uB4DC"],
+    ["\u{1F1F5}\u{1F1F9}", "\uD3EC\uB974\uD22C\uAC08", "\uB9AC\uC2A4\uBCF8"],
+    ["\u{1F1EC}\u{1F1F7}", "\uADF8\uB9AC\uC2A4", "\uC544\uD14C\uB124"],
+    ["\u{1F1FA}\u{1F1F8}", "\uBBF8\uAD6D", "\uC6CC\uC2F1\uD134 D.C."],
+    ["\u{1F1E8}\u{1F1E6}", "\uCE90\uB098\uB2E4", "\uC624\uD0C0\uC640"],
+    ["\u{1F1E7}\u{1F1F7}", "\uBE0C\uB77C\uC9C8", "\uBE0C\uB77C\uC9C8\uB9AC\uC544"],
+    ["\u{1F1E6}\u{1F1F7}", "\uC544\uB974\uD5E8\uD2F0\uB098", "\uBD80\uC5D0\uB178\uC2A4\uC544\uC774\uB808\uC2A4"],
+    ["\u{1F1E6}\u{1F1FA}", "\uC624\uC2A4\uD2B8\uB808\uC77C\uB9AC\uC544", "\uCE94\uBC84\uB77C"],
+    ["\u{1F1F3}\u{1F1FF}", "\uB274\uC9C8\uB79C\uB4DC", "\uC6F0\uB9C1\uD134"],
+    ["\u{1F1EA}\u{1F1EC}", "\uC774\uC9D1\uD2B8", "\uCE74\uC774\uB85C"],
+    ["\u{1F1F0}\u{1F1EA}", "\uCF00\uB0D0", "\uB098\uC774\uB85C\uBE44"],
+    ["\u{1F1F9}\u{1F1F7}", "\uD280\uB974\uD0A4\uC608", "\uC559\uCE74\uB77C"],
+    ["\u{1F1E8}\u{1F1ED}", "\uC2A4\uC704\uC2A4", "\uBCA0\uB978"]
+  ];
+  var words = [
+    ["remember", "\uAE30\uC5B5\uD558\uB2E4"],
+    ["discover", "\uBC1C\uACAC\uD558\uB2E4"],
+    ["curious", "\uD638\uAE30\uC2EC\uC774 \uB9CE\uC740"],
+    ["journey", "\uC5EC\uD589, \uC5EC\uC815"],
+    ["practice", "\uC5F0\uC2B5; \uC5F0\uC2B5\uD558\uB2E4"],
+    ["improve", "\uD5A5\uC0C1\uC2DC\uD0A4\uB2E4"],
+    ["knowledge", "\uC9C0\uC2DD"],
+    ["imagine", "\uC0C1\uC0C1\uD558\uB2E4"],
+    ["challenge", "\uB3C4\uC804"],
+    ["achieve", "\uB2EC\uC131\uD558\uB2E4"],
+    ["patient", "\uCC38\uC744\uC131 \uC788\uB294; \uD658\uC790"],
+    ["confident", "\uC790\uC2E0\uAC10 \uC788\uB294"],
+    ["opportunity", "\uAE30\uD68C"],
+    ["purpose", "\uBAA9\uC801"],
+    ["consistent", "\uC77C\uAD00\uB41C"],
+    ["inspire", "\uC601\uAC10\uC744 \uC8FC\uB2E4"],
+    ["explore", "\uD0D0\uD5D8\uD558\uB2E4"],
+    ["essential", "\uD544\uC218\uC801\uC778"],
+    ["resilient", "\uD68C\uBCF5\uB825\uC774 \uC788\uB294"],
+    ["perspective", "\uAD00\uC810"]
+  ];
+  var dynasties = {
+    "\uACE0\uAD6C\uB824": "\uB3D9\uBA85\uC131\uC655 \uC720\uB9AC\uBA85\uC655 \uB300\uBB34\uC2E0\uC655 \uBBFC\uC911\uC655 \uBAA8\uBCF8\uC655 \uD0DC\uC870\uC655 \uCC28\uB300\uC655 \uC2E0\uB300\uC655 \uACE0\uAD6D\uCC9C\uC655 \uC0B0\uC0C1\uC655 \uB3D9\uCC9C\uC655 \uC911\uCC9C\uC655 \uC11C\uCC9C\uC655 \uBD09\uC0C1\uC655 \uBBF8\uCC9C\uC655 \uACE0\uAD6D\uC6D0\uC655 \uC18C\uC218\uB9BC\uC655 \uACE0\uAD6D\uC591\uC655 \uAD11\uAC1C\uD1A0\uB300\uC655 \uC7A5\uC218\uC655 \uBB38\uC790\uBA85\uC655 \uC548\uC7A5\uC655 \uC548\uC6D0\uC655 \uC591\uC6D0\uC655 \uD3C9\uC6D0\uC655 \uC601\uC591\uC655 \uC601\uB958\uC655 \uBCF4\uC7A5\uC655".split(" "),
+    "\uBC31\uC81C": "\uC628\uC870\uC655 \uB2E4\uB8E8\uC655 \uAE30\uB8E8\uC655 \uAC1C\uB8E8\uC655 \uCD08\uACE0\uC655 \uAD6C\uC218\uC655 \uC0AC\uBC18\uC655 \uACE0\uC774\uC655 \uCC45\uACC4\uC655 \uBD84\uC11C\uC655 \uBE44\uB958\uC655 \uACC4\uC655 \uADFC\uCD08\uACE0\uC655 \uADFC\uAD6C\uC218\uC655 \uCE68\uB958\uC655 \uC9C4\uC0AC\uC655 \uC544\uC2E0\uC655 \uC804\uC9C0\uC655 \uAD6C\uC774\uC2E0\uC655 \uBE44\uC720\uC655 \uAC1C\uB85C\uC655 \uBB38\uC8FC\uC655 \uC0BC\uADFC\uC655 \uB3D9\uC131\uC655 \uBB34\uB839\uC655 \uC131\uC655 \uC704\uB355\uC655 \uD61C\uC655 \uBC95\uC655 \uBB34\uC655 \uC758\uC790\uC655".split(" "),
+    "\uC2E0\uB77C": "\uD601\uAC70\uC138 \uAC70\uC11C\uAC04|\uB0A8\uD574 \uCC28\uCC28\uC6C5|\uC720\uB9AC \uC774\uC0AC\uAE08|\uD0C8\uD574 \uC774\uC0AC\uAE08|\uD30C\uC0AC \uC774\uC0AC\uAE08|\uC9C0\uB9C8 \uC774\uC0AC\uAE08|\uC77C\uC131 \uC774\uC0AC\uAE08|\uC544\uB2EC\uB77C \uC774\uC0AC\uAE08|\uBC8C\uD734 \uC774\uC0AC\uAE08|\uB0B4\uD574 \uC774\uC0AC\uAE08|\uC870\uBD84 \uC774\uC0AC\uAE08|\uCCA8\uD574 \uC774\uC0AC\uAE08|\uBBF8\uCD94 \uC774\uC0AC\uAE08|\uC720\uB840 \uC774\uC0AC\uAE08|\uAE30\uB9BC \uC774\uC0AC\uAE08|\uD758\uD574 \uC774\uC0AC\uAE08|\uB0B4\uBB3C \uB9C8\uB9BD\uAC04|\uC2E4\uC131 \uB9C8\uB9BD\uAC04|\uB20C\uC9C0 \uB9C8\uB9BD\uAC04|\uC790\uBE44 \uB9C8\uB9BD\uAC04|\uC18C\uC9C0 \uB9C8\uB9BD\uAC04|\uC9C0\uC99D\uC655|\uBC95\uD765\uC655|\uC9C4\uD765\uC655|\uC9C4\uC9C0\uC655|\uC9C4\uD3C9\uC655|\uC120\uB355\uC5EC\uC655|\uC9C4\uB355\uC5EC\uC655|\uD0DC\uC885 \uBB34\uC5F4\uC655|\uBB38\uBB34\uC655|\uC2E0\uBB38\uC655|\uD6A8\uC18C\uC655|\uC131\uB355\uC655|\uD6A8\uC131\uC655|\uACBD\uB355\uC655|\uD61C\uACF5\uC655|\uC120\uB355\uC655|\uC6D0\uC131\uC655|\uC18C\uC131\uC655|\uC560\uC7A5\uC655|\uD5CC\uB355\uC655|\uD765\uB355\uC655|\uD76C\uAC15\uC655|\uBBFC\uC560\uC655|\uC2E0\uBB34\uC655|\uBB38\uC131\uC655|\uD5CC\uC548\uC655|\uACBD\uBB38\uC655|\uD5CC\uAC15\uC655|\uC815\uAC15\uC655|\uC9C4\uC131\uC5EC\uC655|\uD6A8\uACF5\uC655|\uC2E0\uB355\uC655|\uACBD\uBA85\uC655|\uACBD\uC560\uC655|\uACBD\uC21C\uC655".split("|"),
+    "\uACE0\uB824": "\uD0DC\uC870 \uD61C\uC885 \uC815\uC885 \uAD11\uC885 \uACBD\uC885 \uC131\uC885 \uBAA9\uC885 \uD604\uC885 \uB355\uC885 \uC815\uC885 \uBB38\uC885 \uC21C\uC885 \uC120\uC885 \uD5CC\uC885 \uC219\uC885 \uC608\uC885 \uC778\uC885 \uC758\uC885 \uBA85\uC885 \uC2E0\uC885 \uD76C\uC885 \uAC15\uC885 \uACE0\uC885 \uC6D0\uC885 \uCDA9\uB82C\uC655 \uCDA9\uC120\uC655 \uCDA9\uC219\uC655 \uCDA9\uD61C\uC655 \uCDA9\uBAA9\uC655 \uCDA9\uC815\uC655 \uACF5\uBBFC\uC655 \uC6B0\uC655 \uCC3D\uC655 \uACF5\uC591\uC655".split(" "),
+    "\uC870\uC120": "\uD0DC\uC870 \uC815\uC885 \uD0DC\uC885 \uC138\uC885 \uBB38\uC885 \uB2E8\uC885 \uC138\uC870 \uC608\uC885 \uC131\uC885 \uC5F0\uC0B0\uAD70 \uC911\uC885 \uC778\uC885 \uBA85\uC885 \uC120\uC870 \uAD11\uD574\uAD70 \uC778\uC870 \uD6A8\uC885 \uD604\uC885 \uC219\uC885 \uACBD\uC885 \uC601\uC870 \uC815\uC870 \uC21C\uC870 \uD5CC\uC885 \uCCA0\uC885 \uACE0\uC885 \uC21C\uC885".split(" ")
+  };
+  function getCards(topic2, direction2, dynasty2 = "\uC870\uC120") {
+    if (topic2 === "kings") return dynasties[dynasty2].map((name, i) => ({ id: `${dynasty2}-${i}`, left: `${dynasty2} ${i + 1}\uB300`, right: name }));
+    return (topic2 === "countries" ? countries : words).map((item, i) => {
+      let left, right;
+      if (topic2 === "countries") {
+        const [flag, name, capital] = item;
+        if (direction2 === "reverse") {
+          left = capital;
+          right = `${flag} ${name}`;
+        } else if (direction2 === "flag") {
+          left = flag;
+          right = `${name} \xB7 ${capital}`;
+        } else {
+          left = `${flag} ${name}`;
+          right = capital;
+        }
+      } else {
+        [left, right] = direction2 === "reverse" ? [item[1], item[0]] : item;
+      }
+      return { id: `${topic2}-${i}`, left, right };
+    });
+  }
+
+  // app.js
+  var app = document.querySelector("#app");
+  var topics = { countries: { title: "\uAD6D\uAE30\uC640 \uC218\uB3C4", icon: "\u25CE", tag: "WORLD", description: "\uAD6D\uAE30 \uB108\uBA38\uC758 \uB098\uB77C, \uADF8 \uB098\uB77C\uC758 \uC218\uB3C4\uAE4C\uC9C0.", count: `${countries.length}\uAC1C\uAD6D`, color: "green" }, kings: { title: "\uD55C\uAD6D\uC758 \uC5ED\uB300 \uC655", icon: "\u265C", tag: "HISTORY", description: "\uD750\uB984\uC744 \uB530\uB77C \uCC28\uACE1\uCC28\uACE1, \uC6B0\uB9AC \uC5ED\uC0AC\uC758 \uC655\uB4E4.", count: "5\uAC1C \uC655\uC870", color: "orange" }, words: { title: "\uC601\uC5B4 \uB2E8\uC5B4", icon: "Aa", tag: "LANGUAGE", description: "\uC775\uC219\uD574\uC9C8 \uB54C\uAE4C\uC9C0, \uB2E8\uC5B4\uC640 \uB73B\uC744 \uD568\uAED8.", count: `${words.length}\uAC1C \uB2E8\uC5B4`, color: "purple" } };
+  var topic = null;
+  var mode = null;
+  var direction = "forward";
+  var dynasty = "\uC870\uC120";
+  var revealed = /* @__PURE__ */ new Set();
+  var cards = [];
+  var shuffled = false;
+  function home() {
+    topic = null;
+    mode = null;
+    app.innerHTML = `<section class="hero"><span class="eyebrow">YOUR PERSONAL MEMORY SPACE</span><h1>\uC624\uB298\uC740 \uBB34\uC5C7\uC744<br><span>\uAE30\uC5B5\uD574 \uBCFC\uAE4C\uC694?</span></h1><p>\uC791\uC740 \uBC30\uC6C0\uC774 \uBAA8\uC5EC \uC624\uB798 \uB0A8\uB294 \uAE30\uC5B5\uC774 \uB429\uB2C8\uB2E4.<br>\uAD00\uC2EC \uC788\uB294 \uC8FC\uC81C\uB97C \uACE8\uB77C \uC2DC\uC791\uD574 \uBCF4\uC138\uC694.</p><div class="hero-decoration" aria-hidden="true"><div class="paper paper-back"></div><div class="paper paper-front"><span>\u2726</span><i></i><i></i><i></i><small>\uD558\uB8E8 \uD55C \uC7A5\uC758 \uBC30\uC6C0</small></div><b>\u2727</b></div></section><div class="section-heading"><h2>\uB098\uC758 \uD559\uC2B5 \uC8FC\uC81C <span>03</span></h2><span>\uB098\uB9CC\uC758 \uC18D\uB3C4\uB85C \uC2DC\uC791\uD558\uC138\uC694</span></div><section class="topics">${Object.entries(topics).map(([id, t]) => `<button class="topic-card ${t.color}" data-topic="${id}"><div class="card-top"><span class="topic-icon">${t.icon}</span><span class="tag">${t.tag}</span></div><h3>${t.title}</h3><p>${t.description}</p><div class="card-bottom"><span>${t.count}</span><span class="arrow">\u2197</span></div></button>`).join("")}</section><aside class="tip"><span>\u2726</span><div><strong>\uAE30\uC5B5\uC740 \uBC18\uBCF5\uD560\uC218\uB85D \uB2E8\uB2E8\uD574\uC838\uC694</strong><p>\uBA3C\uC800 \uACF5\uBD80\uD558\uACE0, \uD14C\uC2A4\uD2B8\uB85C \uAE30\uC5B5\uC744 \uAEBC\uB0B4 \uBCF4\uC138\uC694. \uC815\uB2F5\uC740 \uD558\uB098\uC529 \uD655\uC778\uD560 \uC218 \uC788\uC5B4\uC694.</p></div></aside>`;
+    app.querySelectorAll("[data-topic]").forEach((b) => b.onclick = () => choose(b.dataset.topic));
+  }
+  function choose(id) {
+    topic = id;
+    mode = null;
+    const t = topics[id];
+    app.innerHTML = `<button class="back" id="back">\u2190 \uBAA8\uB4E0 \uC8FC\uC81C</button><section class="intro"><span class="topic-icon ${t.color}">${t.icon}</span><span class="eyebrow">${t.tag}</span><h1>${t.title}</h1><p>\uC5B4\uB5A4 \uBC29\uC2DD\uC73C\uB85C \uAE30\uC5B5\uC744 \uC313\uC544 \uBCFC\uAE4C\uC694?</p></section><section class="modes"><button data-mode="study"><span class="mode-symbol">\u25A4</span><h2>\uACF5\uBD80\uD558\uAE30 <span>\u2192</span></h2><p>${id === "kings" ? "\uC655\uC870\uBCC4 \uC655\uC744 \uC21C\uC11C\uB300\uB85C \uC0B4\uD3B4\uBCF4\uC138\uC694." : "\uC9C8\uBB38\uACFC \uB2F5\uC744 \uB098\uB780\uD788 \uBCF4\uBA70 \uC775\uD600 \uBCF4\uC138\uC694."}</p><small>\uCC28\uADFC\uCC28\uADFC \uC54C\uC544\uAC00\uAE30</small></button><button data-mode="test"><span class="mode-symbol">\u2727</span><h2>\uD14C\uC2A4\uD2B8\uD558\uAE30 <span>\u2192</span></h2><p>\uB2F5\uC744 \uB5A0\uC62C\uB9B0 \uB4A4, \uD558\uB098\uC529 \uC815\uB2F5\uC744 \uD655\uC778\uD558\uC138\uC694.</p><small>\uC5BC\uB9C8\uB098 \uAE30\uC5B5\uD558\uB294\uC9C0 \uD655\uC778\uD558\uAE30</small></button></section>`;
+    document.querySelector("#back").onclick = home;
+    app.querySelectorAll("[data-mode]").forEach((b) => b.onclick = () => {
+      mode = b.dataset.mode;
+      direction = "forward";
+      shuffled = false;
+      reset();
+      render();
+    });
+  }
+  function reset() {
+    revealed.clear();
+    cards = getCards(topic, direction, dynasty);
+    if (shuffled) for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+  }
+  function render() {
+    const t = topics[topic];
+    const test = mode === "test";
+    app.innerHTML = `<button class="back" id="back">\u2190 \uD559\uC2B5 \uBC29\uC2DD \uC120\uD0DD</button><div class="workspace-title"><div><span class="eyebrow">${t.tag}</span><h1>${t.title}</h1></div><div class="segmented"><button id="study" class="${!test ? "active" : ""}">\uACF5\uBD80</button><button id="test" class="${test ? "active" : ""}">\uD14C\uC2A4\uD2B8</button></div></div><p class="workspace-description">${test ? "\uBA3C\uC800 \uB2F5\uC744 \uB5A0\uC62C\uB824 \uBCF4\uC138\uC694. \uC900\uBE44\uB418\uBA74 \uC815\uB2F5\uC744 \uD558\uB098\uC529 \uD655\uC778\uD558\uC138\uC694." : topic === "kings" ? "\uC655\uC870\uC758 \uD750\uB984\uC744 \uB530\uB77C, \uC5ED\uB300 \uC655\uC744 \uC21C\uC11C\uB300\uB85C \uC775\uD600 \uBCF4\uC138\uC694." : "\uC67C\uCABD\uACFC \uC624\uB978\uCABD\uC744 \uC5F0\uACB0\uD558\uBA70 \uCC9C\uCC9C\uD788 \uAE30\uC5B5\uD574 \uBCF4\uC138\uC694."}</p><div class="toolbar"><label>${topic === "kings" ? "\uC655\uC870" : "\uD559\uC2B5 \uBC29\uD5A5"} <select id="direction">${topic === "kings" ? Object.keys(dynasties).map((k) => `<option ${k === dynasty ? "selected" : ""}>${k}</option>`).join("") : topic === "countries" ? `<option value="forward">\uAD6D\uAE30\xB7\uB098\uB77C \u2192 \uC218\uB3C4</option><option value="reverse" ${direction === "reverse" ? "selected" : ""}>\uC218\uB3C4 \u2192 \uAD6D\uAE30\xB7\uB098\uB77C</option><option value="flag" ${direction === "flag" ? "selected" : ""}>\uAD6D\uAE30 \u2192 \uB098\uB77C\xB7\uC218\uB3C4</option>` : `<option value="forward">\uC601\uC5B4 \u2192 \uD55C\uAD6D\uC5B4</option><option value="reverse" ${direction === "reverse" ? "selected" : ""}>\uD55C\uAD6D\uC5B4 \u2192 \uC601\uC5B4</option>`}</select></label><div class="toolbar-actions">${!(topic === "kings" && !test) ? `<button id="shuffle">\u21C4 ${shuffled ? "\uC21C\uC11C\uB300\uB85C" : "\uC11E\uAE30"}</button>` : ""}${test ? '<button id="reset">\u21BA \uB2E4\uC2DC \uC2DC\uC791</button>' : ""}</div></div>${test ? `<div class="progress-label"><span>\uC815\uB2F5 \uD655\uC778</span><strong id="count">${revealed.size} / ${cards.length}</strong></div><div class="progress-track"><div id="progress" style="width:${revealed.size / cards.length * 100}%"></div></div>` : ""}<div class="list-header"><span>${topic === "kings" ? "\uC655\uC870 \xB7 \uC21C\uC11C" : direction === "reverse" ? topic === "countries" ? "\uC218\uB3C4" : "\uD55C\uAD6D\uC5B4 \uB73B" : topic === "countries" ? "\uAD6D\uAE30 \xB7 \uB098\uB77C" : "\uC601\uC5B4 \uB2E8\uC5B4"}</span><span>${topic === "kings" ? "\uC655 \uC774\uB984" : direction === "reverse" ? topic === "countries" ? "\uAD6D\uAE30 \xB7 \uB098\uB77C" : "\uC601\uC5B4 \uB2E8\uC5B4" : topic === "countries" ? direction === "flag" ? "\uB098\uB77C \xB7 \uC218\uB3C4" : "\uC218\uB3C4" : "\uD55C\uAD6D\uC5B4 \uB73B"}</span></div><section class="learning-list">${cards.map((c, i) => `<div class="learning-row"><div class="question"><span class="row-number">${String(i + 1).padStart(2, "0")}</span><span class="${direction === "flag" ? "flag-only" : ""}">${c.left}</span></div><div class="answer" id="answer-${i}">${test && !revealed.has(c.id) ? `<button class="reveal" data-index="${i}" aria-label="${c.left} \uC815\uB2F5 \uBCF4\uAE30">\uC815\uB2F5 \uBCF4\uAE30 <span>\uFF0B</span></button>` : `<span>${c.right}</span>${test ? "<small>\uD655\uC778 \uC644\uB8CC \u2713</small>" : ""}`}</div></div>`).join("")}</section><p class="end-note">${test ? "\uC815\uB2F5 \uD655\uC778\uC740 \uCC44\uC810\uC774 \uC544\uB2C8\uC5D0\uC694. \uC2A4\uC2A4\uB85C \uAE30\uC5B5\uC744 \uC810\uAC80\uD574 \uBCF4\uC138\uC694." : "\uC11C\uB450\uB974\uC9C0 \uC54A\uC544\uB3C4 \uAD1C\uCC2E\uC544\uC694. \uC624\uB298\uC758 \uBC30\uC6C0\uC774 \uCC28\uACE1\uCC28\uACE1 \uC313\uC774\uACE0 \uC788\uC5B4\uC694."}</p><div id="completion" role="status">${test && revealed.size === cards.length ? "\uBAA8\uB4E0 \uC815\uB2F5\uC744 \uD655\uC778\uD588\uC5B4\uC694. \uB2E4\uC2DC \uB3C4\uC804\uD574 \uBCFC\uAE4C\uC694?" : ""}</div>`;
+    document.querySelector("#back").onclick = () => choose(topic);
+    for (const m of ["study", "test"]) document.querySelector("#" + m).onclick = () => {
+      mode = m;
+      reset();
+      render();
+    };
+    document.querySelector("#direction").onchange = (e) => {
+      if (topic === "kings") dynasty = e.target.value;
+      else direction = e.target.value;
+      reset();
+      render();
+    };
+    const shuffle = document.querySelector("#shuffle");
+    if (shuffle) shuffle.onclick = () => {
+      shuffled = !shuffled;
+      reset();
+      render();
+    };
+    const restart = document.querySelector("#reset");
+    if (restart) restart.onclick = () => {
+      reset();
+      render();
+    };
+    app.querySelectorAll(".reveal").forEach((b) => b.onclick = () => {
+      const i = Number(b.dataset.index), c = cards[i];
+      revealed.add(c.id);
+      const el = document.querySelector("#answer-" + i);
+      el.innerHTML = `<span>${c.right}</span><small>\uD655\uC778 \uC644\uB8CC \u2713</small>`;
+      document.querySelector("#count").textContent = `${revealed.size} / ${cards.length}`;
+      document.querySelector("#progress").style.width = `${revealed.size / cards.length * 100}%`;
+      if (revealed.size === cards.length) document.querySelector("#completion").textContent = "\uBAA8\uB4E0 \uC815\uB2F5\uC744 \uD655\uC778\uD588\uC5B4\uC694. \uB2E4\uC2DC \uB3C4\uC804\uD574 \uBCFC\uAE4C\uC694?";
+    });
+  }
+  document.querySelector(".brand").onclick = (e) => {
+    e.preventDefault();
+    home();
+  };
+  home();
+})();
+</script></body></html>
