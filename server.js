@@ -1,9 +1,13 @@
 import http from 'node:http';
-import { readFile } from 'node:fs/promises';
-const files = {'/':'index.html','/index.html':'index.html','/app.js':'app.js','/data.js':'data.js','/style.css':'style.css'};
-const types = {html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
-http.createServer(async (req,res)=>{
- const file=files[new URL(req.url,'http://localhost').pathname];
- if(!file){res.writeHead(404);res.end('Not found');return;}
- try {const body=await readFile(new URL(file,import.meta.url));res.writeHead(200,{'Content-Type':types[file.split('.').pop()]});res.end(body);} catch {res.writeHead(500);res.end('Unable to load file');}
+import {readFile} from 'node:fs/promises';
+const files=new Set(['index.html','app.js','data.js','storage.js','style.css','datasets/countries.js','datasets/history.js','datasets/SOURCES.md','datasets/COUNTRIES-LICENSE','datasets/country-sources.json']);
+const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8',svg:'image/svg+xml',md:'text/plain; charset=utf-8',json:'application/json'};
+http.createServer(async(req,res)=>{
+ const pathname=new URL(req.url,'http://localhost').pathname;
+ const file=pathname==='/'?'index.html':pathname.slice(1);
+ if(!files.has(file)&&!/^assets\/flags\/[a-z]{2}\.svg$/.test(file)){res.writeHead(404);res.end('Not found');return;}
+ try{
+  const body=await readFile(new URL(file,import.meta.url));
+  res.writeHead(200,{'Content-Type':types[file.split('.').pop()]||'text/plain; charset=utf-8','X-Content-Type-Options':'nosniff'});res.end(body);
+ }catch(err){res.writeHead(err.code==='ENOENT'?404:500);res.end('Unable to load file');}
 }).listen(Number(process.env.PORT)||3000,'0.0.0.0',()=>console.log('Memory app running on port '+(process.env.PORT||3000)));
