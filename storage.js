@@ -2,7 +2,7 @@ const validId=id=>typeof id==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(id)&&!Obje
 export const STORAGE_KEY='chagok.personal.v1'; // Keep the key so existing installations migrate in place.
 export const countryDirections=['name-capital','name-flag','capital-name','capital-flag','flag-name','flag-capital'];
 const legacyDirections={forward:['name-capital'],reverse:['capital-name','capital-flag'],flag:['flag-name','flag-capital']};
-export function emptyState(){return {schemaVersion:2,books:[],words:[],mistakes:{countries:{},words:{}}};}
+export function emptyState(){return {schemaVersion:3,books:[],words:[],mistakes:{countries:{},words:{},hanja:{}}};}
 export function validateState(value){
  const state=emptyState();if(!value||typeof value!=='object')return state;
  const bookIds=new Set();
@@ -16,7 +16,7 @@ export function validateState(value){
    state.words.push({id:w.id,word:w.word.trim(),meaning:w.meaning.trim(),bookId});
   }
  }
- for(const topic of ['countries','words']){
+ for(const topic of ['countries','words','hanja']){
   const records=value.mistakes?.[topic];if(!records||typeof records!=='object')continue;
   for(const [id,dirs]of Object.entries(records)){
    if(!validId(id)||!Array.isArray(dirs))continue;
@@ -29,7 +29,7 @@ export function validateState(value){
 export function loadState(storage){try{return {state:validateState(JSON.parse(storage.getItem(STORAGE_KEY)||'null')),error:false};}catch{return {state:emptyState(),error:true};}}
 export function saveState(storage,state){try{storage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch{return false;}}
 export function markResult(state,topic,id,direction,correct){
- if(!['countries','words'].includes(topic)||!validId(id))return;
+ if(!['countries','words','hanja'].includes(topic)||!validId(id))return;
  const previous=state.mistakes[topic][id],remaining=new Set(Array.isArray(previous)?previous:[]);
  if(correct)remaining.delete(direction);else remaining.add(direction);
  if(remaining.size)state.mistakes[topic][id]=[...remaining];else delete state.mistakes[topic][id];
@@ -51,6 +51,6 @@ export function mergeStates(current,incoming,newId){
   words.set(mapped.id,mapped);
  }
  merged.books=[...books.values()];merged.words=[...words.values()];
- for(const t of ['countries','words'])for(const [id,dirs]of Object.entries(other.mistakes[t]))merged.mistakes[t][id]=[...new Set([...(merged.mistakes[t][id]||[]),...dirs])];
+ for(const t of ['countries','words','hanja'])for(const [id,dirs]of Object.entries(other.mistakes[t]))merged.mistakes[t][id]=[...new Set([...(merged.mistakes[t][id]||[]),...dirs])];
  return merged;
 }

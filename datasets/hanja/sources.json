@@ -1,0 +1,26 @@
+{
+  "source": "https://raw.githubusercontent.com/rycont/hanja-grade-dataset/main/hanja.csv",
+  "original": "https://www.hanja.re.kr/",
+  "mirror": "https://github.com/rycont/hanja-grade-dataset",
+  "retrieved": "2026-10-16",
+  "sha256": "8a54b274540a46332fedb5f947ca9f437a6e4ac83197580b1c844f88f0251715",
+  "count": 5978,
+  "gradeNewCounts": {
+    "8급": 50,
+    "7급Ⅱ": 50,
+    "7급": 50,
+    "6급Ⅱ": 75,
+    "6급": 75,
+    "5급Ⅱ": 100,
+    "5급": 100,
+    "4급Ⅱ": 250,
+    "4급": 250,
+    "3급Ⅱ": 500,
+    "3급": 317,
+    "2급": 538,
+    "1급": 1145,
+    "특급Ⅱ": 1150,
+    "특급": 1328
+  },
+  "notice": "한국어문회 공식 XLS 자료를 CSV로 변환한 공개 미러. 원자료 저작권은 한국어문회에 있습니다. 원본 급수 배정을 유지합니다."
+}

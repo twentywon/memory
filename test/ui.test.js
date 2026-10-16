@@ -74,3 +74,27 @@ test('party reference is visible in study and hidden until the test answer is re
  click('#test');assert.equal(d.querySelectorAll('.party').length,0);click('.reveal');assert.equal(d.querySelectorAll('.party').length,1);
  assert.deepEqual(errors,[]);dom.window.close();
 });
+
+test('Hanja grade picker, two directions and pagination retain revealed answers and results',()=>{
+ const {dom,d,click,change,errors}=setup();click('[data-topic="hanja"]');assert.equal(d.querySelectorAll('[data-grade-pick]').length,15);
+ click('[data-grade-pick="7급"]');click('[data-mode="study"]');assert.equal(d.querySelectorAll('.learning-row').length,50);assert.ok(d.querySelector('.pagination').textContent.includes('1 / 3'));
+ click('#page-next');assert.ok(d.querySelector('.pagination').textContent.includes('2 / 3'));
+ change('#direction','reverse');assert.equal(d.querySelectorAll('.hanja-answer').length,50);assert.match(d.querySelector('.question').textContent,/[가-힣]/);
+ click('#test');click('.reveal');click('[data-grade="wrong"]');assert.ok(d.querySelector('#row-0').classList.contains('is-wrong'));
+ click('#page-next');click('#page-prev');assert.ok(d.querySelector('#row-0').classList.contains('is-wrong'));assert.equal(d.querySelectorAll('.reveal').length,49);
+ click('#review');assert.equal(d.querySelectorAll('.learning-row').length,1);assert.deepEqual(errors,[]);dom.window.close();
+});
+test('Android back event navigates lesson → choice → book list → home without leaving the page',()=>{
+ const {dom,d,click,submit,errors}=setup();const back=()=>dom.window.dispatchEvent(new dom.window.Event('chagok-back'));
+ click('[data-topic="words"]');submit('#book-form',{bookName:'뒤로 이동 시험'});click('[data-book]');submit('#word-form',{word:'back',meaning:'뒤'});click('[data-mode="study"]');
+ assert.equal(d.querySelectorAll('.learning-row').length,1);back();assert.ok(d.querySelector('[data-mode]'));back();assert.ok(d.querySelector('#book-form'));back();assert.equal(d.querySelectorAll('[data-topic]').length,4);back();assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ click('[data-topic="hanja"]');click('[data-grade-pick="8급"]');click('[data-mode="study"]');back();back();assert.equal(d.querySelectorAll('[data-grade-pick]').length,15);
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+test('country test start, restart and reshuffle invoke randomization instead of ordered mode',()=>{
+ const {dom,d,click,errors}=setup();let calls=0;dom.window.Math.random=()=>{calls++;return .2;};
+ click('[data-topic="countries"]');click('[data-mode="test"]');assert.ok(calls>=194);let previous=calls;
+ click('#reset');assert.ok(calls>=previous+194);previous=calls;
+ click('#shuffle');assert.ok(calls>=previous+194);assert.equal(d.querySelector('#shuffle').textContent.trim(),'⇄ 다시 섞기');
+ assert.deepEqual(errors,[]);dom.window.close();
+});

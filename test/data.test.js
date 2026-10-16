@@ -84,3 +84,28 @@ test('modern leader parties are populated and specific to their recorded tenure'
  assert.equal(russell[0].party,'휘그당');assert.equal(russell[1].party,'자유당');
  assert.ok(dynasties['조선'].every(r=>!r.party));
 });
+
+test('Hanja has 5978 unique characters, 15 grade allocations and both study directions',async()=>{
+ const {hanja,hanjaGrades}=await import('../data.js');
+ assert.equal(hanja.length,5978);assert.equal(new Set(hanja.map(h=>h.id)).size,5978);assert.equal(hanjaGrades.length,15);
+ const totals=[50,100,150,225,300,400,500,750,1000,1500,1817,2355,3500,4650,5978];
+ for(const [i,grade]of hanjaGrades.entries())assert.equal(getCards('hanja','forward',{grade}).length,totals[i]);
+ const forward=getCards('hanja','forward',{grade:'8급'}),reverse=getCards('hanja','reverse',{grade:'8급'});
+ assert.equal(forward.length,50);assert.equal(forward[0].left,reverse[0].right);assert.equal(forward[0].right,reverse[0].left);
+ assert.ok(hanja.every(h=>h.hanja&&h.answer&&h.grade));
+ assert.equal(getCards('hanja','forward',{grade:'7급',hanjaScope:'new'}).length,50);
+});
+test('shuffle preserves records, does not mutate the source and uses its random source',async()=>{
+ const {shuffledCards}=await import('../learning.js');
+ const original=[{id:'a'},{id:'b'},{id:'c'},{id:'d'}];let calls=0;
+ const shuffled=shuffledCards(original,()=>{calls++;return 0;});
+ assert.equal(calls,3);assert.deepEqual(original.map(c=>c.id),['a','b','c','d']);assert.deepEqual(shuffled.map(c=>c.id),['b','c','d','a']);assert.deepEqual(new Set(shuffled.map(c=>c.id)),new Set(original.map(c=>c.id)));
+});
+test('screen parents return from lessons through selection screens and stay at home',async()=>{
+ const {previousScreen}=await import('../learning.js');
+ assert.equal(previousScreen('workspace','words'),'choose');assert.equal(previousScreen('choose','words'),'books');assert.equal(previousScreen('choose','hanja'),'grades');assert.equal(previousScreen('choose','kings'),'leaders');assert.equal(previousScreen('books','words'),'home');assert.equal(previousScreen('home',null),'home');
+});
+test('Hanja errors persist without losing existing word or country mistakes',()=>{
+ const state=validateState({words:[],mistakes:{countries:{kr:['name-capital']},words:{w1:['forward']},hanja:{'hanja-5b78':['reverse']}}});
+ assert.ok(isMistake(state,'hanja','hanja-5b78','reverse'));markResult(state,'hanja','hanja-5b78','reverse',true);assert.equal(Object.keys(state.mistakes.hanja).length,0);assert.ok(state.mistakes.words.w1);assert.ok(state.mistakes.countries.kr);
+});
