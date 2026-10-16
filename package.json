@@ -1,6 +1,6 @@
 {
   "name": "memory-platform",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,8 @@
     "android:apk": "npm run android:sync && cd android && ./gradlew --no-daemon --max-workers=2 assembleDebug && cd .. && node scripts/package-apk.mjs",
     "data:refresh": "python scripts/import-countries.py",
     "icons:android": "capacitor-assets generate --android --assetPath resources --iconBackgroundColor '#244F3F' --iconBackgroundColorDark '#244F3F' --splashBackgroundColor '#244F3F' --splashBackgroundColorDark '#244F3F'",
-    "hanja:refresh": "python scripts/import-hanja.py"
+    "hanja:refresh": "python scripts/import-hanja.py",
+    "idioms:refresh": "python scripts/import-idioms.py"
   },
   "dependencies": {
     "@capacitor/android": "^7.6.9",

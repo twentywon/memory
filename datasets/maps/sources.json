@@ -1,0 +1,13 @@
+{
+  "source": "https://github.com/vuski/admdongkor",
+  "raw": "https://raw.githubusercontent.com/vuski/admdongkor/master/ver20260401/HangJeongDong_ver20260401.geojson",
+  "snapshot": "2026-04-01",
+  "retrieved": "2026-10-16",
+  "sha256": "90da81444f68b9a5b0bd5762f84bc6a8a9a702750c20223d52b1c5114cf7b0b1",
+  "license": "CC-BY-4.0; SGIS upstream attribution preserved",
+  "upstream": "통계청 통계지리정보서비스(SGIS), 공공누리 제1유형",
+  "provinces": 17,
+  "districts": 255,
+  "processing": "행정동 경계를 시군구·시도로 합치고 위상 보존 단순화 후 메르카토르 투영의 SVG 경로 생성",
+  "notice": "학습용 경계. 인천 2026.07 개편은 지도에 미반영. 퀴즈 최신 편집 목록과 차이 있음."
+}

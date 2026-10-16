@@ -131,3 +131,25 @@ test('periodic table includes all elements, shows details and returns to prior l
  click('#open-periodic');dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.equal(d.querySelectorAll('.reveal').length,1);assert.equal(d.querySelectorAll('.learning-row').length,2);
  assert.deepEqual(errors,[]);dom.window.close();
 });
+
+test('region tests hide province filters and always draw from the whole country',()=>{
+ const {dom,d,click,change,errors}=setup();click('[data-topic="regions"]');click('[data-mode="study"]');change('#province','서울특별시');assert.equal(d.querySelectorAll('.learning-row').length,25);
+ click('#test');assert.equal(d.querySelector('#province'),null);assert.equal(d.querySelector('#region-kind'),null);assert.ok(d.querySelector('.pagination').textContent.includes('총'));
+ const count=d.querySelector('.pagination').textContent;assert.ok(!count.includes('총 25개'));click('#study');assert.equal(d.querySelector('#province').value,'서울특별시');
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+test('national map opens province detail, highlights districts, zooms, and returns via native back',()=>{
+ const {dom,d,click,errors}=setup();click('[data-topic="regions"]');click('#open-map');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);
+ click('[data-map-list="11"]');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,25);
+ click('[data-map-list]');assert.ok(d.querySelector('#map-detail strong'));const vb=d.querySelector('#korea-map').getAttribute('viewBox');click('#map-zoom-in');assert.notEqual(d.querySelector('#korea-map').getAttribute('viewBox'),vb);
+ dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);
+ dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.ok(d.querySelector('[data-mode]'));
+ click('[data-mode="study"]');click('#open-map');click('[data-map-list="28"]');assert.ok(d.querySelector('.map-snapshot').textContent.includes('개편 이전'));
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+test('expanded idiom study search is independent of its nationwide-style full tests',()=>{
+ const {dom,d,click,submit,errors}=setup();click('[data-topic="idioms"]');click('[data-mode="study"]');
+ d.querySelector('#idiom-search').value='고진감래';submit('#idiom-search-form',{});assert.equal(d.querySelectorAll('.learning-row').length,1);
+ click('#test');assert.equal(d.querySelector('#idiom-search'),null);assert.ok(d.querySelector('.pagination').textContent.includes('2,307'));
+ assert.deepEqual(errors,[]);dom.window.close();
+});

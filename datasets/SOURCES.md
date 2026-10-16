@@ -61,3 +61,8 @@
 - 행정구역: 공개 주소 트리에서 추출하고 최근 명칭·경계 변경을 수동 반영했습니다. 범위·동명 정답·세종·제주 예외와 보정 내역은 `regions/README.md`, 출처·원본 체크섬은 `regions/sources.json`에 있습니다. 실시간 공식 코드 원본과 연동하지 않습니다.
 - 사자성어: 자주 쓰이는 4음절 표현·4한자 65개를 선별했습니다. 공개 목록 https://github.com/dalmook/dalsaja 의 표현·한자를 참고해 대조했고 풀이는 직접 요약했습니다. 다섯 글자 이상의 고사성어는 이 목록에 포함하지 않습니다. 교과 과정이나 시험의 공식 전체 목록을 뜻하지 않습니다. 뜻에는 다른 가능한 동의 표현이 있을 수 있어 자기 채점으로 제공합니다.
 - 원소: https://github.com/Bowserinator/Periodic-Table-JSON , CC BY-SA 3.0. 원자번호 1~118번과 주기율표 좌표를 사용하고 한글 이름·통용명을 편집했습니다. 원본에 있는 미확정 119번은 제외합니다. 상세 기준·라이선스는 `science/README.md`, `science/ELEMENTS-LICENSE.md`, 수집 기록은 `science/sources.json`에 있습니다.
+
+## 전국·상세 지도와 사자성어 확장 (v1.6)
+
+- 지도: 통계청 SGIS(공공누리 제1유형) → vuski/admdongkor(CC BY 4.0), 2026-04-01 스냅샷. 시도 17개·시군구 255개의 합친·단순화한 경계를 오프라인 SVG로 제공합니다. 최신 편집 퀴즈 목록과의 날짜 차이, 특히 인천 개편 이전 경계임을 지도에 명시합니다. `maps/README.md`, `maps/LICENSE-DATA`, `maps/sources.json` 참고.
+- 사자성어: 기존 65개를 보존하고 MIT 공개 자료 LiF-Lee/idioms 2,318개와 중복·형식을 검사해 합친 2,307개. 모든 사전·시험 범위의 전수를 뜻하지 않습니다. 출처·필터·라이선스는 `idioms/README.md`, `idioms/LICENSE`, `idioms/sources.json` 참고.

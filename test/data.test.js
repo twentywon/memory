@@ -122,7 +122,7 @@ test('Korean subdivisions retain 17 provinces, updated borders and multiple-pare
  assert.ok(!getCards('regions','forward',{regionKind:'basic'}).some(c=>c.left==='수원시 영통구'));
 });
 test('idioms have exactly four characters, stable IDs and reversed question/answer pairs',async()=>{
- const {idioms}=await import('../data.js');assert.equal(idioms.length,65);assert.equal(new Set(idioms.map(r=>r.id)).size,65);
+ const {idioms}=await import('../data.js');assert.equal(idioms.length,2307);assert.equal(new Set(idioms.map(r=>r.id)).size,2307);
  assert.ok(idioms.every(r=>[...r.word].length===4&&[...r.hanja].length===4&&r.meaning));
  const a=getCards('idioms','forward'),b=getCards('idioms','reverse');assert.equal(a[0].left,b[0].right);assert.equal(a[0].right,b[0].left);
 });
@@ -130,11 +130,36 @@ test('118 recognized elements have unique numbers, symbols and grid positions; h
  const {elements}=await import('../data.js');assert.equal(elements.length,118);assert.deepEqual(elements.map(e=>e.number),Array.from({length:118},(_,i)=>i+1));
  assert.equal(new Set(elements.map(e=>e.symbol)).size,118);assert.equal(new Set(elements.map(e=>`${e.x}-${e.y}`)).size,118);
  assert.ok(elements.every(e=>/^[A-Z][a-z]?$/.test(e.symbol)&&/[가-힣]/.test(e.name)&&e.x>=1&&e.x<=18&&e.y>=1&&e.y<=10));
- const a=getCards('elements','forward'),b=getCards('elements','reverse');assert.equal(a[0].left,'수소');assert.equal(a[0].right,'H');assert.equal(b[0].left,'H');assert.equal(b[0].right,'수소');
+ const a=getCards('elements','forward'),b=getCards('elements','reverse');assert.equal(a[0].left,'1 · 수소');assert.equal(a[0].right,'1 · H');assert.equal(b[0].left,'1 · H');assert.equal(b[0].right,'1 · 수소');
  assert.equal(getCards('elements','forward',{elementPeriod:'1'}).length,2);
 });
 test('new topic mistakes migrate, merge and persist alongside existing vocabulary',()=>{
  const state=emptyState();for(const topic of ['regions','idioms','elements'])markResult(state,topic,topic+'-one','forward',false);
  const copy=validateState(state);for(const topic of ['regions','idioms','elements'])assert.ok(isMistake(copy,topic,topic+'-one','forward'));
  const merged=mergeStates(copy,{words:[],mistakes:{hanja:{'hanja-one':['reverse']}}},()=> 'new');assert.ok(merged.mistakes.hanja['hanja-one']);assert.ok(merged.mistakes.elements['elements-one']);
+});
+
+test('region exams ignore study province and district-kind filters',()=>{
+ const all=getCards('regions','forward',{test:true});
+ const restricted=getCards('regions','forward',{test:true,province:'서울특별시',regionKind:'basic'});
+ assert.deepEqual(restricted,all);assert.ok(restricted.some(c=>c.left==='수원시 영통구'));assert.ok(restricted.some(c=>c.right.includes('제주특별자치도')));
+});
+test('offline map has 17 provinces and 255 district shapes with valid SVG paths',async()=>{
+ const {default:maps}=await import('../datasets/region-maps.js');
+ assert.equal(maps.snapshot,'2026-04-01');assert.equal(maps.nation.features.length,17);assert.equal(Object.keys(maps.regions).length,17);
+ assert.equal(Object.values(maps.regions).reduce((n,r)=>n+r.features.length,0),255);
+ for(const map of [maps.nation,...Object.values(maps.regions)])for(const f of map.features){assert.match(f.d,/^M/);assert.ok(f.d.endsWith('Z'));assert.ok(!f.d.includes('NaN'));assert.ok(f.name);assert.ok(f.x>=0&&f.x<=map.width&&f.y>=0&&f.y<=map.height);}
+ assert.equal(maps.regions['11'].features.length,25);assert.equal(maps.regions['50']?.features.length||Object.values(maps.regions).find(r=>r.name==='제주특별자치도').features.length,2);
+});
+test('expanded idioms preserve original IDs and definitions, while tests ignore study searches',async()=>{
+ const {idioms}=await import('../data.js');const original=JSON.parse(await readFile(new URL('../datasets/idioms/curated-base.json',import.meta.url)));
+ for(const old of original)assert.deepEqual(idioms.find(r=>r.id===old.id),old);
+ assert.equal(new Set(idioms.map(r=>r.word)).size,idioms.length);
+ assert.ok(getCards('idioms','forward',{idiomSearch:'고진감래'}).length<idioms.length);
+ assert.equal(getCards('idioms','forward',{idiomSearch:'고진감래',test:true}).length,idioms.length);
+});
+test('every element card keeps its atomic number alongside the name and symbol in both directions',async()=>{
+ const {elements}=await import('../data.js');for(const direction of ['forward','reverse']){
+  const cards=getCards('elements',direction);for(const [i,c]of cards.entries()){assert.ok(c.left.startsWith(`${elements[i].number} · `));assert.ok(c.right.startsWith(`${elements[i].number} · `));}
+ }
 });

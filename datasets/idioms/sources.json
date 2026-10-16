@@ -1,0 +1,15 @@
+{
+  "source": "https://github.com/LiF-Lee/idioms",
+  "raw": "https://raw.githubusercontent.com/LiF-Lee/idioms/main/idioms.json",
+  "sha256": "d1c700c3c6ed4369258e27e7d173fa5447117eb729440b6ba894d513dfade720",
+  "retrieved": "2026-10-16",
+  "license": "MIT; Copyright (c) 2021 EliF",
+  "rawCount": 2318,
+  "curatedPreserved": 65,
+  "accepted": 2307,
+  "excluded": {
+    "중복·표기 변형": 75,
+    "4음절·4한자 또는 뜻 조건 미달": 1
+  },
+  "notice": "특정 시험·사전의 전체 수록 목록이 아님. 네 글자 표현만 수록하며 기존 65개 ID·풀이를 보존함. 공개 자료의 역사적·고전적 표현 포함."
+}

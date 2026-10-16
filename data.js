@@ -15,12 +15,12 @@ export const countryModes=[['name-capital','국가명 → 수도'],['name-flag',
 export const fieldNames={name:'국가명',capital:'수도',flag:'국기'};
 export function getCards(topic,direction,options={}){
  if(topic==='regions'){
-  const rows=regions.rows.filter(r=>options.regionKind!=='basic'||r.kind!=='일반구');
+  const rows=regions.rows.filter(r=>options.test||options.regionKind!=='basic'||r.kind!=='일반구');
   const grouped=new Map();for(const r of rows){if(!grouped.has(r.name))grouped.set(r.name,[]);grouped.get(r.name).push(r);}
-  return [...grouped].filter(([,rs])=>!options.province||options.province==='전체'||rs.some(r=>r.province===options.province)).map(([name,rs])=>({id:'region-'+[...name].map(c=>c.codePointAt(0).toString(16)).join('-'),left:name,right:[...new Set(rs.map(r=>r.province))].join(' · '),reference:[...new Set(rs.map(r=>r.kind))].join(' · ')}));
+  return [...grouped].filter(([,rs])=>options.test||!options.province||options.province==='전체'||rs.some(r=>r.province===options.province)).map(([name,rs])=>({id:'region-'+[...name].map(c=>c.codePointAt(0).toString(16)).join('-'),left:name,right:[...new Set(rs.map(r=>r.province))].join(' · '),reference:[...new Set(rs.map(r=>r.kind))].join(' · ')}));
  }
- if(topic==='idioms')return idioms.map(r=>({id:r.id,left:direction==='reverse'?r.meaning:`${r.word} (${r.hanja})`,right:direction==='reverse'?`${r.word} (${r.hanja})`:r.meaning}));
- if(topic==='elements')return elements.filter(e=>!options.elementPeriod||options.elementPeriod==='전체'||e.period===Number(options.elementPeriod)).map(e=>({id:e.id,left:direction==='reverse'?e.symbol:e.name,right:direction==='reverse'?e.name:e.symbol,symbolSide:direction==='reverse'?'left':'right',reference:e.alias?`다른 이름: ${e.alias}`:undefined}));
+ if(topic==='idioms')return idioms.filter(r=>options.test||!options.idiomSearch||`${r.word} ${r.hanja} ${r.meaning}`.includes(options.idiomSearch.trim())).map(r=>({id:r.id,left:direction==='reverse'?r.meaning:`${r.word} (${r.hanja})`,right:direction==='reverse'?`${r.word} (${r.hanja})`:r.meaning}));
+ if(topic==='elements')return elements.filter(e=>!options.elementPeriod||options.elementPeriod==='전체'||e.period===Number(options.elementPeriod)).map(e=>({id:e.id,left:direction==='reverse'?`${e.number} · ${e.symbol}`:`${e.number} · ${e.name}`,right:direction==='reverse'?`${e.number} · ${e.name}`:`${e.number} · ${e.symbol}`,symbolSide:direction==='reverse'?'left':'right',reference:e.alias?`다른 이름: ${e.alias}`:undefined}));
  if(topic==='hanja'){
   const rank=hanjaGrades.indexOf(options.grade||'8급');
   return hanja.filter(h=>options.hanjaScope==='new'?h.grade===(options.grade||'8급'):hanjaGrades.indexOf(h.grade)<=rank).map(h=>({id:h.id,left:direction==='reverse'?h.answer:h.hanja,right:direction==='reverse'?h.hanja:h.answer,hanjaSide:direction==='reverse'?'right':'left'}));
