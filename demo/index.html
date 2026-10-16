@@ -5948,7 +5948,12 @@ header{padding-top:env(safe-area-inset-top);height:calc(94px + env(safe-area-ins
     else if (previous === "grades") showHanjaGrades();
     else home();
   }
-  window.addEventListener("chagok-back", goBack);
+  window.addEventListener("chagok-back", (event) => {
+    if (screen !== "home") {
+      event.preventDefault();
+      goBack();
+    }
+  });
   function choose(id) {
     screen = "choose";
     topic = id;
