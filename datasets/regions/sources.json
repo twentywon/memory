@@ -1,0 +1,21 @@
+{
+  "base": "https://github.com/Guk0/KoreanAddressJson/blob/master/address2.json",
+  "baseSHA256": "31c3e02a8083dfe60c264e845a045269f0ff644e7425d3a8cfed7b4c1f5e22ca",
+  "retrieved": "2026-10-16",
+  "count": 268,
+  "kindCounts": {
+    "자치구": 70,
+    "군": 82,
+    "시": 75,
+    "일반구": 39,
+    "행정시": 2
+  },
+  "editorialUpdates": [
+    "군위군 대구 편입(2023)",
+    "강원·전북 특별자치도 명칭",
+    "부천 일반구 복원(2024)",
+    "화성 일반구 신설(2026)",
+    "인천 제물포구·영종구·검단구 개편(2026.07.01)"
+  ],
+  "notice": "공개 주소 목록을 바탕으로 수동 보정한 학습 자료. 최신 공식 코드 원본과 실시간 연동하지 않음."
+}

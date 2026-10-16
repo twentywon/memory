@@ -109,3 +109,32 @@ test('Hanja errors persist without losing existing word or country mistakes',()=
  const state=validateState({words:[],mistakes:{countries:{kr:['name-capital']},words:{w1:['forward']},hanja:{'hanja-5b78':['reverse']}}});
  assert.ok(isMistake(state,'hanja','hanja-5b78','reverse'));markResult(state,'hanja','hanja-5b78','reverse',true);assert.equal(Object.keys(state.mistakes.hanja).length,0);assert.ok(state.mistakes.words.w1);assert.ok(state.mistakes.countries.kr);
 });
+
+test('Korean subdivisions retain 17 provinces, updated borders and multiple-parent names',async()=>{
+ const {regions}=await import('../data.js');assert.equal(regions.provinces.length,17);assert.equal(regions.rows.length,268);
+ assert.equal(regions.rows.filter(r=>['시','군','자치구'].includes(r.kind)).length,227);
+ assert.equal(regions.rows.filter(r=>r.kind==='행정시').length,2);assert.ok(!regions.rows.some(r=>r.province==='세종특별자치시'));
+ assert.equal(regions.rows.find(r=>r.name==='군위군').province,'대구광역시');
+ assert.ok(regions.rows.some(r=>r.name==='화성시 동탄구'));assert.ok(regions.rows.some(r=>r.name==='영종구'&&r.province==='인천광역시'));
+ const cards=getCards('regions','forward',{province:'전체'});const jung=cards.find(c=>c.left==='중구');assert.ok(jung.right.includes('서울특별시'));assert.ok(jung.right.includes('부산광역시'));assert.ok(!jung.right.includes('인천광역시'));
+ const goseong=cards.find(c=>c.left==='고성군');assert.ok(goseong.right.includes('강원특별자치도'));assert.ok(goseong.right.includes('경상남도'));
+ assert.ok(getCards('regions','forward',{province:'경기도'}).every(c=>c.right.includes('경기도')));
+ assert.ok(!getCards('regions','forward',{regionKind:'basic'}).some(c=>c.left==='수원시 영통구'));
+});
+test('idioms have exactly four characters, stable IDs and reversed question/answer pairs',async()=>{
+ const {idioms}=await import('../data.js');assert.equal(idioms.length,65);assert.equal(new Set(idioms.map(r=>r.id)).size,65);
+ assert.ok(idioms.every(r=>[...r.word].length===4&&[...r.hanja].length===4&&r.meaning));
+ const a=getCards('idioms','forward'),b=getCards('idioms','reverse');assert.equal(a[0].left,b[0].right);assert.equal(a[0].right,b[0].left);
+});
+test('118 recognized elements have unique numbers, symbols and grid positions; hypothetical 119 excluded',async()=>{
+ const {elements}=await import('../data.js');assert.equal(elements.length,118);assert.deepEqual(elements.map(e=>e.number),Array.from({length:118},(_,i)=>i+1));
+ assert.equal(new Set(elements.map(e=>e.symbol)).size,118);assert.equal(new Set(elements.map(e=>`${e.x}-${e.y}`)).size,118);
+ assert.ok(elements.every(e=>/^[A-Z][a-z]?$/.test(e.symbol)&&/[가-힣]/.test(e.name)&&e.x>=1&&e.x<=18&&e.y>=1&&e.y<=10));
+ const a=getCards('elements','forward'),b=getCards('elements','reverse');assert.equal(a[0].left,'수소');assert.equal(a[0].right,'H');assert.equal(b[0].left,'H');assert.equal(b[0].right,'수소');
+ assert.equal(getCards('elements','forward',{elementPeriod:'1'}).length,2);
+});
+test('new topic mistakes migrate, merge and persist alongside existing vocabulary',()=>{
+ const state=emptyState();for(const topic of ['regions','idioms','elements'])markResult(state,topic,topic+'-one','forward',false);
+ const copy=validateState(state);for(const topic of ['regions','idioms','elements'])assert.ok(isMistake(copy,topic,topic+'-one','forward'));
+ const merged=mergeStates(copy,{words:[],mistakes:{hanja:{'hanja-one':['reverse']}}},()=> 'new');assert.ok(merged.mistakes.hanja['hanja-one']);assert.ok(merged.mistakes.elements['elements-one']);
+});

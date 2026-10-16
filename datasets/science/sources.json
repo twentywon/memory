@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/Bowserinator/Periodic-Table-JSON",
+  "raw": "https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json",
+  "sha256": "361bc5b62b646dd9c4ec870e9b5b81fc2f46ebb7d06eb4324c788db5ab768c97",
+  "retrieved": "2026-10-16",
+  "license": "CC-BY-SA-3.0",
+  "notice": "원자번호·기호·주기율표 좌표를 사용하고 한글 이름과 통용명은 편집. 미확정 119번 항목 제외."
+}

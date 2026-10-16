@@ -20,7 +20,7 @@ test('Android packaged entry renders its home after loading the external head sc
    dom.window.addEventListener('load',()=>{clearTimeout(timer);resolve();},{once:true});
   });
   const d=dom.window.document;assert.deepEqual(errors,[]);
-  assert.equal(d.querySelectorAll('#app [data-topic]').length,4);
+  assert.equal(d.querySelectorAll('#app [data-topic]').length,7);
   d.querySelector('[data-topic="countries"]').click();d.querySelector('[data-mode="study"]').click();
   assert.equal(d.querySelectorAll('.learning-row').length,195);
  }finally{dom?.window.close();await new Promise(resolve=>server.close(resolve));}

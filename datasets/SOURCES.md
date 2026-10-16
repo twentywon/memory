@@ -55,3 +55,9 @@
 ## 한국어문회 한자
 
 15급수 5,978자를 공개 CSV 미러에서 수집했습니다. 원자료 권리·수집 경로·교차 확인·급수별 수량은 [hanja/README.md](hanja/README.md), 원본 및 SHA-256은 `hanja/original.csv`, `hanja/sources.json`에 있습니다.
+
+## 대한민국 행정구역·사자성어·원소 (v1.5)
+
+- 행정구역: 공개 주소 트리에서 추출하고 최근 명칭·경계 변경을 수동 반영했습니다. 범위·동명 정답·세종·제주 예외와 보정 내역은 `regions/README.md`, 출처·원본 체크섬은 `regions/sources.json`에 있습니다. 실시간 공식 코드 원본과 연동하지 않습니다.
+- 사자성어: 자주 쓰이는 4음절 표현·4한자 65개를 선별했습니다. 공개 목록 https://github.com/dalmook/dalsaja 의 표현·한자를 참고해 대조했고 풀이는 직접 요약했습니다. 다섯 글자 이상의 고사성어는 이 목록에 포함하지 않습니다. 교과 과정이나 시험의 공식 전체 목록을 뜻하지 않습니다. 뜻에는 다른 가능한 동의 표현이 있을 수 있어 자기 채점으로 제공합니다.
+- 원소: https://github.com/Bowserinator/Periodic-Table-JSON , CC BY-SA 3.0. 원자번호 1~118번과 주기율표 좌표를 사용하고 한글 이름·통용명을 편집했습니다. 원본에 있는 미확정 119번은 제외합니다. 상세 기준·라이선스는 `science/README.md`, `science/ELEMENTS-LICENSE.md`, 수집 기록은 `science/sources.json`에 있습니다.

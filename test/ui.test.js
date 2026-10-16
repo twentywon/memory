@@ -87,7 +87,7 @@ test('Hanja grade picker, two directions and pagination retain revealed answers 
 test('Android back event navigates lesson → choice → book list → home without leaving the page',()=>{
  const {dom,d,click,submit,errors}=setup();const back=()=>dom.window.dispatchEvent(new dom.window.Event('chagok-back'));
  click('[data-topic="words"]');submit('#book-form',{bookName:'뒤로 이동 시험'});click('[data-book]');submit('#word-form',{word:'back',meaning:'뒤'});click('[data-mode="study"]');
- assert.equal(d.querySelectorAll('.learning-row').length,1);back();assert.ok(d.querySelector('[data-mode]'));back();assert.ok(d.querySelector('#book-form'));back();assert.equal(d.querySelectorAll('[data-topic]').length,4);back();assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ assert.equal(d.querySelectorAll('.learning-row').length,1);back();assert.ok(d.querySelector('[data-mode]'));back();assert.ok(d.querySelector('#book-form'));back();assert.equal(d.querySelectorAll('[data-topic]').length,7);back();assert.equal(d.querySelectorAll('[data-topic]').length,7);
  click('[data-topic="hanja"]');click('[data-grade-pick="8급"]');click('[data-mode="study"]');back();back();assert.equal(d.querySelectorAll('[data-grade-pick]').length,15);
  assert.deepEqual(errors,[]);dom.window.close();
 });
@@ -102,10 +102,32 @@ test('country test start, restart and reshuffle invoke randomization instead of 
 test('native back request asks Android to confirm exit only at home',()=>{
  const {dom,d,click,errors}=setup();
  const request=()=>!dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));
- assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,7);
  click('[data-topic="countries"]');click('[data-mode="study"]');
  assert.equal(request(),true);assert.ok(d.querySelector('[data-mode]'));
- assert.equal(request(),true);assert.equal(d.querySelectorAll('[data-topic]').length,4);
- assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ assert.equal(request(),true);assert.equal(d.querySelectorAll('[data-topic]').length,7);
+ assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,7);
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+
+test('regions filters retain multiple valid parents and support self-grading and review',()=>{
+ const {dom,d,click,change,errors}=setup();click('[data-topic="regions"]');click('[data-mode="study"]');
+ change('#province','제주특별자치도');assert.equal(d.querySelectorAll('.learning-row').length,2);assert.ok(d.querySelector('.learning-list').textContent.includes('제주시'));
+ change('#province','세종특별자치시');assert.equal(d.querySelectorAll('.learning-row').length,0);
+ change('#province','서울특별시');click('#test');click('.reveal');click('[data-grade="wrong"]');click('#review');assert.equal(d.querySelectorAll('.learning-row').length,1);
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+test('idioms show meaning in reverse mode and have independent reviews',()=>{
+ const {dom,d,click,change,errors}=setup();click('[data-topic="idioms"]');click('[data-mode="study"]');assert.equal(d.querySelectorAll('.learning-row').length,50);
+ change('#direction','reverse');assert.ok(!d.querySelector('.question').textContent.includes('家家戶戶'));
+ click('#test');click('.reveal');click('[data-grade="wrong"]');click('#review');assert.equal(d.querySelectorAll('.learning-row').length,1);
+ const state=JSON.parse(dom.window.localStorage.getItem(STORAGE_KEY));assert.equal(Object.keys(state.mistakes.idioms).length,1);assert.equal(Object.keys(state.mistakes.elements).length,0);
+ assert.deepEqual(errors,[]);dom.window.close();
+});
+test('periodic table includes all elements, shows details and returns to prior lesson with revealed state',()=>{
+ const {dom,d,click,change,errors}=setup();click('[data-topic="elements"]');click('#open-periodic');assert.equal(d.querySelectorAll('[data-element]').length,118);
+ click('[data-element="26"]');assert.match(d.querySelector('#element-detail').textContent,/Fe.*철/);click('#back');assert.ok(d.querySelector('[data-mode]'));
+ click('[data-mode="test"]');change('#element-period','1');assert.equal(d.querySelectorAll('.learning-row').length,2);click('.reveal');assert.equal(d.querySelectorAll('.reveal').length,1);
+ click('#open-periodic');dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.equal(d.querySelectorAll('.reveal').length,1);assert.equal(d.querySelectorAll('.learning-row').length,2);
  assert.deepEqual(errors,[]);dom.window.close();
 });

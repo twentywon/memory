@@ -9,6 +9,8 @@ await copyFile('style.css','www/style.css');
 await cp('assets','www/assets',{recursive:true});
 await mkdir('www/datasets',{recursive:true});
 await cp('datasets/hanja','www/datasets/hanja',{recursive:true});
+await cp('datasets/regions','www/datasets/regions',{recursive:true});
+await cp('datasets/science','www/datasets/science',{recursive:true});
 for(const file of ['SOURCES.md','COUNTRIES-LICENSE','country-sources.json'])await copyFile('datasets/'+file,'www/datasets/'+file);
 const css=await readFile('style.css','utf8');
 const js=await readFile('www/app.js','utf8');
