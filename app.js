@@ -93,7 +93,9 @@ function goBack(){
  const previous=previousScreen(screen,topic);
  if(previous==='choose')choose(topic);else if(previous==='books')showBooks();else if(previous==='leaders')showLeaderCountries();else if(previous==='grades')showHanjaGrades();else home();
 }
-window.addEventListener('chagok-back',goBack);
+window.addEventListener('chagok-back',event=>{
+ if(screen!=='home'){event.preventDefault();goBack();}
+});
 function choose(id){
  screen='choose';topic=id;mode=null;review=false;const t=topics[id];if(id==='words'&&!currentBook()){showBooks();return;}
  app.innerHTML=`<button class="back" id="back">← 모든 주제</button>${warning()}<section class="intro"><span class="topic-icon ${t.color}">${t.icon}</span><span class="eyebrow">${t.tag}</span><h1>${escape(title())}</h1><p>어떤 방식으로 기억을 쌓아 볼까요?</p></section><section class="modes ${id!=='kings'?'three-modes':''}"><button data-mode="study"><span class="mode-symbol">▤</span><h2>공부하기 <span>→</span></h2><p>${id==='kings'?'순서와 재임 기간을 함께 살펴보세요.':'질문과 답을 나란히 보며 익혀 보세요.'}</p><small>차근차근 알아가기</small></button><button data-mode="test"><span class="mode-symbol">✧</span><h2>테스트하기 <span>→</span></h2><p>정답을 하나씩 확인하고 기억을 점검하세요.</p><small>기억 꺼내 보기</small></button>${id!=='kings'?`<button data-mode="review"><span class="mode-symbol">↺</span><h2>오답노트 <span>→</span></h2><p>틀림으로 표시했던 문제만 다시 풀어 보세요.</p><small>방향별 기록 · ${(id==='words'?saved.words.filter(w=>w.bookId===activeBook&&saved.mistakes.words[w.id]).length:Object.keys(saved.mistakes[id]).length)}개 항목</small></button>`:''}</section>${id==='words'?wordEditor():''}`;

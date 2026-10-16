@@ -98,3 +98,14 @@ test('country test start, restart and reshuffle invoke randomization instead of 
  click('#shuffle');assert.ok(calls>=previous+194);assert.equal(d.querySelector('#shuffle').textContent.trim(),'⇄ 다시 섞기');
  assert.deepEqual(errors,[]);dom.window.close();
 });
+
+test('native back request asks Android to confirm exit only at home',()=>{
+ const {dom,d,click,errors}=setup();
+ const request=()=>!dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));
+ assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ click('[data-topic="countries"]');click('[data-mode="study"]');
+ assert.equal(request(),true);assert.ok(d.querySelector('[data-mode]'));
+ assert.equal(request(),true);assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ assert.equal(request(),false);assert.equal(d.querySelectorAll('[data-topic]').length,4);
+ assert.deepEqual(errors,[]);dom.window.close();
+});
