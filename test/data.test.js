@@ -70,3 +70,17 @@ test('backup validation rejects malformed values and object prototype IDs',()=>{
  const state=validateState(JSON.parse('{"books":[{"id":"constructor","name":"bad"}],"words":[{"id":"__proto__","word":"unsafe","meaning":"unsafe"}],"mistakes":{"countries":{"__proto__":["name-flag"]}}}'));
  assert.equal(state.words.length,0);assert.equal(state.books.length,0);assert.equal(Object.keys(state.mistakes.countries).length,0);assert.equal(isMistake(state,'countries','toString','name-flag'),false);
 });
+
+test('modern leader parties are populated and specific to their recorded tenure',()=>{
+ for(const [country,entry]of Object.entries(leaderCatalog))for(const group of entry.groups){
+  if(country==='한국'&&group!=='대한민국 대통령')continue;
+  assert.ok(getCards('kings',null,{dynasty:group}).every(c=>typeof c.party==='string'&&c.party.length>0),group);
+ }
+ assert.equal(dynasties['미국 대통령'][0].party,'무소속');
+ assert.equal(dynasties['미국 대통령'].find(r=>r.name==='시어도어 루스벨트').party,'공화당');
+ const ito=dynasties['일본 총리대신'].filter(r=>r.name==='이토 히로부미');
+ assert.equal(ito[0].party,'무소속');assert.equal(ito.at(-1).party,'입헌정우회');
+ const russell=dynasties['영국 총리'].filter(r=>r.name==='존 러셀');
+ assert.equal(russell[0].party,'휘그당');assert.equal(russell[1].party,'자유당');
+ assert.ok(dynasties['조선'].every(r=>!r.party));
+});

@@ -1,1 +1,5 @@
-{"appId":"com.twentywon.memory","appName":"차곡","webDir":"www"}
+{
+  "appId": "com.twentywon.memory",
+  "appName": "차곡-암기 앱",
+  "webDir": "www"
+}

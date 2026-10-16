@@ -67,3 +67,10 @@ test('text backup preserves book boundaries when restored',()=>{
  assert.ok(d.querySelector('#backup-text').value.includes('텝스'));click('[data-topic="words"]');click('[data-book="b"]');click('[data-mode="review"]');assert.equal(d.querySelectorAll('.learning-row').length,1);
  assert.deepEqual(errors,[]);dom.window.close();
 });
+
+test('party reference is visible in study and hidden until the test answer is revealed',()=>{
+ const {dom,d,click,errors}=setup();click('[data-topic="kings"]');click('[data-leader-country="미국"]');click('[data-mode="study"]');
+ assert.equal(d.querySelectorAll('.party').length,47);assert.match(d.querySelector('.party').textContent,/무소속/);
+ click('#test');assert.equal(d.querySelectorAll('.party').length,0);click('.reveal');assert.equal(d.querySelectorAll('.party').length,1);
+ assert.deepEqual(errors,[]);dom.window.close();
+});

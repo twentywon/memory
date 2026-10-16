@@ -56,7 +56,7 @@ npm ci
 npm run android:apk
 ```
 
-결과: `android/app/build/outputs/apk/debug/app-debug.apk`. Android 6.0 이상용 개인 시연용 디버그 서명 APK입니다. 스토어 배포용 릴리스 서명은 별도입니다. Android Studio에서 `android/` 프로젝트를 열고 Device Manager로 가상 기기를 실행한 뒤 APK를 끌어다 놓으면 컴퓨터에서 Android 버전을 시연할 수 있습니다. 실기기는 APK를 전송해 설치합니다. 웹과 APK의 개인 기록은 서로 다른 저장소에 보관됩니다.
+결과: `dist/차곡-암기 앱.apk` (원본: `android/app/build/outputs/apk/debug/app-debug.apk`). Android 6.0 이상용 개인 시연용 디버그 서명 APK입니다. 스토어 배포용 릴리스 서명은 별도입니다. Android Studio에서 `android/` 프로젝트를 열고 Device Manager로 가상 기기를 실행한 뒤 APK를 끌어다 놓으면 컴퓨터에서 Android 버전을 시연할 수 있습니다. 실기기는 APK를 전송해 설치합니다. 웹과 APK의 개인 기록은 서로 다른 저장소에 보관됩니다.
 
 ## 데이터 출처와 구조
 
@@ -70,3 +70,13 @@ npm run android:apk
 - `scripts/build.mjs`: 앱용 정적 파일과 이미지 내장 시연 HTML 생성
 
 데이터 변경 후 `npm test`와 `npm run android:apk`로 시연 HTML과 APK를 갱신합니다.
+
+## 앱 이름·아이콘·정당 참고
+
+Android 표시 이름과 배포 APK 이름은 **차곡-암기 앱**입니다. 새 아이콘은 초록 배경의 학습 카드·체크 표시로 구성했습니다. 원본은 `resources/icon.png`이며 Android 아이콘·스플래시 리소스는 아래 명령으로 생성합니다.
+
+```sh
+npm run icons:android
+```
+
+국가 지도자의 정답 아래에 재임 당시 정당을 참고로 표시합니다. 당명·당적 변경은 →로 표시하고 무소속, 역사적 정치집단, 군벌 계파는 구분합니다. 테스트에서는 정답 공개 전 정당도 가립니다. 정당은 참고 정보이며 퀴즈 채점 대상으로 사용하지 않습니다.
