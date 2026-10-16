@@ -141,7 +141,7 @@ test('region tests hide province filters and always draw from the whole country'
 test('national map opens province detail, highlights districts, zooms, and returns via native back',()=>{
  const {dom,d,click,errors}=setup();click('[data-topic="regions"]');click('#open-map');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);
  click('[data-map-list="11"]');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,25);
- click('[data-map-list]');assert.ok(d.querySelector('#map-detail strong'));const vb=d.querySelector('#korea-map').getAttribute('viewBox');click('#map-zoom-in');assert.notEqual(d.querySelector('#korea-map').getAttribute('viewBox'),vb);
+ click('[data-map-list]');assert.ok(d.querySelector('#map-detail strong'));const svg=d.querySelector('#korea-map'),width=parseFloat(svg.style.width);click('#map-zoom-in');assert.ok(parseFloat(svg.style.width)>width);click('#map-reset');assert.equal(svg.style.width,'900px');click('#map-fit');assert.ok(parseFloat(svg.style.width)<900);click('#map-reset');assert.equal(d.querySelector('#map-scale').textContent,'100%');
  dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);
  dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.ok(d.querySelector('[data-mode]'));
  click('[data-mode="study"]');click('#open-map');click('[data-map-list="28"]');assert.ok(d.querySelector('.map-snapshot').textContent.includes('개편 이전'));
@@ -152,4 +152,18 @@ test('expanded idiom study search is independent of its nationwide-style full te
  d.querySelector('#idiom-search').value='고진감래';submit('#idiom-search-form',{});assert.equal(d.querySelectorAll('.learning-row').length,1);
  click('#test');assert.equal(d.querySelector('#idiom-search'),null);assert.ok(d.querySelector('.pagination').textContent.includes('2,307'));
  assert.deepEqual(errors,[]);dom.window.close();
+});
+
+test('map pinch changes real canvas size and dragging never opens a province',()=>{
+ const {dom,d,click,errors}=setup();click('[data-topic="regions"]');click('#open-map');
+ const canvas=d.querySelector('.map-canvas'),svg=d.querySelector('#korea-map');
+ function pointer(type,id,x,y){const event=new dom.window.Event(type,{bubbles:true});Object.assign(event,{pointerId:id,button:0,clientX:x,clientY:y});canvas.dispatchEvent(event);}
+ pointer('pointerdown',1,100,100);pointer('pointerdown',2,200,100);pointer('pointermove',2,300,100);
+ assert.equal(svg.style.width,'1600px');assert.equal(svg.style.height,'2000px');
+ pointer('pointerup',2,300,100);pointer('pointermove',1,70,60);pointer('pointerup',1,70,60);
+ assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);
+ assert.equal(svg.getAttribute('viewBox'),'0 0 800 1000');
+ for(let i=0;i<15;i++)click('#map-zoom-in');assert.equal(svg.style.width,'4000px');assert.equal(d.querySelector('#map-zoom-in').disabled,true);
+ for(let i=0;i<25;i++)click('#map-zoom-out');assert.equal(svg.style.width,'160px');assert.equal(d.querySelector('#map-zoom-out').disabled,true);
+ click('#map-reset');assert.equal(svg.style.width,'800px');assert.deepEqual(errors,[]);dom.window.close();
 });
