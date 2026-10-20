@@ -144,11 +144,11 @@ test('region exams ignore study province and district-kind filters',()=>{
  const restricted=getCards('regions','forward',{test:true,province:'서울특별시',regionKind:'basic'});
  assert.deepEqual(restricted,all);assert.ok(restricted.some(c=>c.left==='수원시 영통구'));assert.ok(restricted.some(c=>c.right.includes('제주특별자치도')));
 });
-test('offline map has 17 provinces and 255 district shapes with valid SVG paths',async()=>{
+test('offline map preserves 255 districts through province and city hierarchy',async()=>{
  const {default:maps}=await import('../datasets/region-maps.js');
  assert.equal(maps.snapshot,'2026-04-01');assert.equal(maps.nation.features.length,17);assert.equal(Object.keys(maps.regions).length,17);
- assert.equal(Object.values(maps.regions).reduce((n,r)=>n+r.features.length,0),255);
- for(const map of [maps.nation,...Object.values(maps.regions)])for(const f of map.features){assert.match(f.d,/^M/);assert.ok(f.d.endsWith('Z'));assert.ok(!f.d.includes('NaN'));assert.ok(f.name);assert.ok(f.x>=0&&f.x<=map.width&&f.y>=0&&f.y<=map.height);}
+ assert.equal(Object.values(maps.regions).reduce((n,r)=>n+r.features.filter(f=>!f.cityId).length,0)+Object.values(maps.cities).reduce((n,r)=>n+r.features.length,0),255);
+ for(const map of [maps.nation,...Object.values(maps.regions),...Object.values(maps.cities)])for(const f of map.features){assert.match(f.d,/^M/);assert.ok(f.d.endsWith('Z'));assert.ok(!f.d.includes('NaN'));assert.ok(f.name);assert.ok(f.x>=0&&f.x<=map.width&&f.y>=0&&f.y<=map.height);}
  assert.equal(maps.regions['11'].features.length,25);assert.equal(maps.regions['50']?.features.length||Object.values(maps.regions).find(r=>r.name==='제주특별자치도').features.length,2);
 });
 test('expanded idioms preserve original IDs and definitions, while tests ignore study searches',async()=>{
@@ -162,4 +162,23 @@ test('every element card keeps its atomic number alongside the name and symbol i
  const {elements}=await import('../data.js');for(const direction of ['forward','reverse']){
   const cards=getCards('elements',direction);for(const [i,c]of cards.entries()){assert.ok(c.left.startsWith(`${elements[i].number} · `));assert.ok(c.right.startsWith(`${elements[i].number} · `));}
  }
+});
+
+
+test('general districts are grouped into one city boundary and kept on city detail maps',async()=>{
+ const {default:maps}=await import('../datasets/region-maps.js');
+ const expected={'41110':['수원시',4],'41130':['성남시',3],'41170':['안양시',2],'41190':['부천시',3],'41270':['안산시',2],'41280':['고양시',3],'41460':['용인시',3],'41590':['화성시',4],'43110':['청주시',4],'44130':['천안시',2],'47110':['포항시',2],'48120':['창원시',5],'52110':['전주시',2]};
+ assert.deepEqual(Object.keys(maps.cities).sort(),Object.keys(expected).sort());
+ const leaves=[];
+ for(const [cid,[name,count]]of Object.entries(expected)){
+  const city=maps.cities[cid],parent=maps.regions[city.parentId];assert.equal(city.name,name);assert.equal(city.features.length,count);assert.equal(city.parentName,parent.name);
+  assert.equal(parent.features.filter(f=>f.cityId===cid&&f.name===name).length,1);
+  for(const f of city.features){assert.ok(f.name.endsWith('구'));assert.ok(!f.name.includes(' '));assert.ok(!parent.features.some(p=>p.id===f.id));assert.ok(!f.cityId);leaves.push(f.id);}
+ }
+ for(const region of Object.values(maps.regions))for(const f of region.features){if(!f.cityId)leaves.push(f.id);assert.doesNotMatch(f.name,/시 .+구$/);}
+ assert.equal(new Set(leaves).size,255);assert.equal(leaves.length,255);
+ assert.equal(maps.regions['41'].features.length,31);
+ assert.deepEqual(maps.cities['41190'].features.map(f=>f.name).sort(),['소사구','오정구','원미구']);
+ assert.deepEqual(maps.cities['41130'].features.map(f=>f.name).sort(),['분당구','수정구','중원구']);
+ assert.equal(maps.regions['11'].features.length,25);assert.equal(maps.regions['36'].features.length,1);assert.equal(maps.regions['50'].features.length,2);
 });

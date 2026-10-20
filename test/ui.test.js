@@ -167,3 +167,22 @@ test('map pinch changes real canvas size and dragging never opens a province',()
  for(let i=0;i<25;i++)click('#map-zoom-out');assert.equal(svg.style.width,'160px');assert.equal(d.querySelector('#map-zoom-out').disabled,true);
  click('#map-reset');assert.equal(svg.style.width,'800px');assert.deepEqual(errors,[]);dom.window.close();
 });
+
+
+test('province maps open city districts through pointer, keyboard and list; back returns one level',()=>{
+ const {dom,d,click,errors}=setup();click('[data-topic="regions"]');click('#open-map');click('[data-map-list="41"]');
+ assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,31);
+ assert.ok(d.querySelector('.map-labels').textContent.includes('성남시'));assert.ok(!d.querySelector('.map-labels').textContent.includes('분당구'));
+ const path=d.querySelector('[data-map-id="41130"]');
+ for(const type of ['pointerdown','pointerup']){const e=new dom.window.Event(type,{bubbles:true});Object.assign(e,{pointerId:1,button:0,clientX:100,clientY:100});path.dispatchEvent(e);}
+ assert.equal(d.querySelector('h1').textContent,'성남시');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,3);assert.equal(d.querySelector('#back').textContent,'← 경기도 지도');
+ click('[data-map-list="41135"]');assert.equal(d.querySelector('#map-detail strong').textContent,'분당구');click('#map-zoom-in');assert.equal(d.querySelector('#map-scale').textContent,'225%');
+ dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.equal(d.querySelector('h1').textContent,'경기도');
+ click('[data-map-list="41190"]');assert.equal(d.querySelector('h1').textContent,'부천시');assert.equal(d.querySelectorAll('.map-labels text').length,3);assert.ok(d.querySelector('.map-labels').textContent.includes('원미구'));
+ click('#back');assert.equal(d.querySelector('h1').textContent,'경기도');
+ d.querySelector('[data-map-id="41110"]').dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));assert.equal(d.querySelector('h1').textContent,'수원시');
+ click('#back');click('#back');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,17);click('#back');assert.ok(d.querySelector('[data-mode="study"]'));
+ click('[data-mode="study"]');click('#open-map');click('[data-map-list="48"]');click('[data-map-list="48120"]');assert.equal(d.querySelector('h1').textContent,'창원시');assert.equal(d.querySelectorAll('#korea-map [data-map-id]').length,5);
+ for(let i=0;i<3;i++)dom.window.dispatchEvent(new dom.window.Event('chagok-back',{cancelable:true}));assert.ok(d.querySelector('#study'));assert.ok(d.querySelector('.learning-row'));
+ assert.deepEqual(errors,[]);dom.window.close();
+});

@@ -1,4 +1,4 @@
-import {mapMarkup,bindMap} from './map-view.js';
+import {mapMarkup,bindMap,parentMap} from './map-view.js';
 import {shuffledCards,previousScreen} from './learning.js';
 import {countries,dynasties,continents,getCards,countryModes,fieldNames,leaderCatalog,hanja,hanjaGrades,regions,elements,idioms} from './data.js';
 import {loadState,saveState,markResult,isMistake,validateState,emptyState,mergeStates} from './storage.js';
@@ -18,7 +18,7 @@ const topics={
 let topic=null,mode=null,direction='name-capital',dynasty='조선',continent='전체',scope='sovereign',activeBook=null,leaderCountry='한국';
 let screen='home',grade='8급',hanjaScope='cumulative',page=0;
 let province='전체',regionKind='all',elementPeriod='전체',tableReturn='choose',idiomSearch='';
-let mapProvince=null,mapReturn='choose';
+let mapLocation=null,mapReturn='choose';
 const pageSize=50;
 const pagedTopics=['hanja','regions','idioms','elements'];
 let revealed=new Set(),results=new Map(),cards=[],shuffled=false,review=false;
@@ -97,7 +97,7 @@ function pagination(){
 }
 function goBack(){
  if(screen==='home')return;
- if(screen==='map'){if(mapProvince){showRegionMap(mapReturn,null);}else if(mapReturn==='workspace'){render();}else choose('regions');return;}
+ if(screen==='map'){if(mapLocation){showRegionMap(mapReturn,parentMap(mapLocation));}else if(mapReturn==='workspace'){render();}else choose('regions');return;}
  if(screen==='periodic'){if(tableReturn==='workspace')render();else choose('elements');return;}
  const previous=previousScreen(screen,topic);
  if(previous==='choose')choose(topic);else if(previous==='books')showBooks();else if(previous==='leaders')showLeaderCountries();else if(previous==='grades')showHanjaGrades();else home();
@@ -106,7 +106,7 @@ window.addEventListener('chagok-back',event=>{
  if(screen!=='home'){event.preventDefault();goBack();}
 });
 function showRegionMap(from='choose',selected=null){
- topic='regions';screen='map';mapReturn=from;mapProvince=selected;
+ topic='regions';screen='map';mapReturn=from;mapLocation=selected;
  app.innerHTML=mapMarkup(selected);document.querySelector('#back').onclick=goBack;
  bindMap(app,selected,id=>showRegionMap(mapReturn,id));
 }
